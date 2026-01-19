@@ -7,6 +7,12 @@ Send notes to yourself via Signal. Claude classifies them, files them in your Ob
 ## Architecture
 
 ```
+┌─────────────┐
+│     iOS     │
+│  Shortcuts  │
+└──────┬──────┘
+       │
+       ▼
 ┌─────────────┐     ┌──────────────┐     ┌─────────────────┐
 │   Signal    │────▶│  signal-cli  │────▶│ Claude          │
 │ Note-to-Self│     │   daemon     │     │ brain-processor │
