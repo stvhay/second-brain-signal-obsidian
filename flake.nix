@@ -22,6 +22,8 @@
               python3
               python3Packages.jinja2
               cherri.packages.${system}.default
+              graphviz
+              mermaid-cli
             ];
 
             shellHook = ''

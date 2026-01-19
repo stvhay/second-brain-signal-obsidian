@@ -6,29 +6,14 @@ Send notes to yourself via Signal. Claude classifies them, files them in your Ob
 
 ## Architecture
 
-```
-┌─────────────┐
-│     iOS     │
-│  Shortcuts  │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐     ┌──────────────┐     ┌─────────────────┐
-│   Signal    │────▶│  signal-cli  │────▶│ Claude          │
-│ Note-to-Self│     │   daemon     │     │ brain-processor │
-└─────────────┘     └──────────────┘     └────────┬────────┘
-                                                  │
-                    ┌──────────────┐              ▼
-┌─────────────┐     │    MQTT      │     ┌─────────────────┐
-│  Obsidian   │◀────│   notify     │◀────│   git commit    │
-│  (iCloud)   │     └──────────────┘     │  (vault repo)   │
-└─────────────┘              │           └─────────────────┘
-       ▲                     ▼
-       │            ┌──────────────┐
-       └────────────│  Mac daemon  │
-                    │  (git pull)  │
-                    └──────────────┘
-```
+![Overview](diagrams/00-overview.svg)
+
+| Stage | Diagram | Description |
+|-------|---------|-------------|
+| [Capture](diagrams/01-capture.svg) | ![Capture](diagrams/01-capture.svg) | iOS Shortcuts & Signal → signal-cli daemon |
+| [Process](diagrams/02-process.svg) | ![Process](diagrams/02-process.svg) | receipt → classify → form → bounce |
+| [Storage](diagrams/03-storage.svg) | ![Storage](diagrams/03-storage.svg) | Obsidian vault → git hook |
+| [Publish](diagrams/04-publish.svg) | ![Publish](diagrams/04-publish.svg) | MQTT → launchctl service → iCloud |
 
 ## The 8 Building Blocks
 

@@ -1,0 +1,22 @@
+---
+config:
+  layout: elk
+  theme: base
+---
+flowchart TB
+    accTitle: Capture Stage
+    accDescr: Note input from iOS Shortcuts and Signal, received by signal-cli daemon
+
+    %% Cagle Color System
+    classDef user fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px,color:#4A148C
+    classDef service fill:#C8E6C9,stroke:#2E7D32,stroke-width:2px,color:#1B5E20
+    classDef subsystem fill:#ECEFF1,stroke:#455A64,stroke-width:3px,color:#263238
+
+    iOS[iOS Shortcuts]:::user & Signal[Signal Note to Self]:::user
+    Daemon[signal-cli daemon]:::service
+    Process[[Process]]:::subsystem
+
+    iOS --> Signal
+    Signal --> Daemon
+    Daemon --> Process
+    Process -->|fix| Daemon

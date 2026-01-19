@@ -1,0 +1,20 @@
+---
+config:
+  layout: elk
+  theme: base
+---
+flowchart LR
+    accTitle: Storage Stage
+    accDescr: Obsidian vault with git hook for change detection
+
+    %% Cagle Color System
+    classDef data fill:#FFF8E1,stroke:#F57F17,stroke-width:2px,color:#E65100
+    classDef service fill:#C8E6C9,stroke:#2E7D32,stroke-width:2px,color:#1B5E20
+    classDef subsystem fill:#ECEFF1,stroke:#455A64,stroke-width:3px,color:#263238
+
+    Process[[Process]]:::subsystem
+    Obsidian[(Obsidian filing cabinet)]:::data
+    GitHook[git hook]:::service
+    Publish[[Publish]]:::subsystem
+
+    Process --> Obsidian --> GitHook --> Publish

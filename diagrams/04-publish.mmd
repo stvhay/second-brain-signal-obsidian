@@ -1,0 +1,21 @@
+---
+config:
+  layout: elk
+  theme: base
+---
+flowchart LR
+    accTitle: Publish Stage
+    accDescr: MQTT notification triggers local sync to iCloud
+
+    %% Cagle Color System
+    classDef infra fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#0D47A1
+    classDef data fill:#FFF8E1,stroke:#F57F17,stroke-width:2px,color:#E65100
+    classDef service fill:#C8E6C9,stroke:#2E7D32,stroke-width:2px,color:#1B5E20
+    classDef subsystem fill:#ECEFF1,stroke:#455A64,stroke-width:3px,color:#263238
+
+    Storage[[Storage]]:::subsystem
+    MQTT((MQTT Server)):::infra
+    Service[launchctl service]:::service
+    iCloud[(iCloud)]:::data
+
+    Storage --> MQTT --> Service --> iCloud

@@ -1,0 +1,12 @@
+---
+config:
+  layout: elk
+  theme: base
+---
+flowchart LR
+    accTitle: Second Brain Overview
+    accDescr: High-level data flow through the system
+
+    classDef stage fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#0D47A1
+
+    Capture:::stage <--> Process:::stage --> Storage:::stage --> Publish:::stage
