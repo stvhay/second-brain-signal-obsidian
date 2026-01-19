@@ -1,0 +1,25 @@
+// Siri Voice Note Capture
+// Generated from template - do not edit directly
+
+#define name {{ name }}
+#define color {{ color }}
+#define glyph {{ glyph }}
+
+#include 'actions/web'
+#include 'actions/text'
+
+// Capture voice input via dictation
+@note = listen()
+
+// Send to API
+const response = jsonRequest("{{ endpoint }}", "POST", {
+    "content": "{note}",
+    "source": "siri"
+}, {
+    "{{ auth_header }}": "{{ auth_value }}",
+    "Content-Type": "application/json"
+})
+
+{% if show_confirmation %}
+alert("Note saved!", "Done")
+{% endif %}

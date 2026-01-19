@@ -1,0 +1,13 @@
+services:
+  signal-bot:
+    container_name: signal-bot
+    restart: unless-stopped
+    image: bbernhard/signal-cli-rest-api:latest
+    environment:
+      - MODE=json-rpc                      # supported modes: json-rpc, native, normal
+      # - AUTO_RECEIVE_SCHEDULE=0 22 * * *   # NORMAL MODE ONLY / enable this parameter on demand
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./signal-bot/conf:/home/.local/share/signal-cli"  # map config dir into docker container.
+

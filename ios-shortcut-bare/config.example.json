@@ -1,0 +1,31 @@
+{
+  "api": {
+    "endpoint": "https://your-api.example.com/notes",
+    "auth_header": "Authorization",
+    "auth_value": "Bearer YOUR_TOKEN"
+  },
+  "shortcuts": {
+    "siri-note": {
+      "enabled": true,
+      "name": "Quick Note",
+      "color": "blue",
+      "glyph": "microphone"
+    },
+    "text-note": {
+      "enabled": true,
+      "name": "New Note",
+      "color": "green",
+      "glyph": "note"
+    },
+    "share-note": {
+      "enabled": true,
+      "name": "Save to Notes",
+      "color": "orange",
+      "glyph": "uploadArrow"
+    }
+  },
+  "defaults": {
+    "show_confirmation": true,
+    "include_timestamp": true
+  }
+}

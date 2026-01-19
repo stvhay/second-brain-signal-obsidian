@@ -1,0 +1,28 @@
+// Text Note Entry
+// Generated from template - do not edit directly
+
+#define name {{ name }}
+#define color {{ color }}
+#define glyph {{ glyph }}
+#define noinput askfor text
+
+#include 'actions/web'
+
+// Get text from input or prompt user
+@note = ShortcutInput
+if !@note {
+    @note = prompt("Enter your note:")
+}
+
+// Send to API
+const response = jsonRequest("{{ endpoint }}", "POST", {
+    "content": "{note}",
+    "source": "text"
+}, {
+    "{{ auth_header }}": "{{ auth_value }}",
+    "Content-Type": "application/json"
+})
+
+{% if show_confirmation %}
+alert("Note saved!", "Done")
+{% endif %}

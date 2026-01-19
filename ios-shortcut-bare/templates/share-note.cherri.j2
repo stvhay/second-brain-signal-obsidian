@@ -1,0 +1,26 @@
+// Share Sheet Note Capture
+// Generated from template - do not edit directly
+
+#define name {{ name }}
+#define color {{ color }}
+#define glyph {{ glyph }}
+#define inputs text, url
+#define from sharesheet
+
+#include 'actions/web'
+
+// Capture shared content
+@shared = ShortcutInput
+
+// Send to API
+const response = jsonRequest("{{ endpoint }}", "POST", {
+    "content": "{shared}",
+    "source": "share"
+}, {
+    "{{ auth_header }}": "{{ auth_value }}",
+    "Content-Type": "application/json"
+})
+
+{% if show_confirmation %}
+alert("Saved!", "Done")
+{% endif %}

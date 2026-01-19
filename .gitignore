@@ -1,0 +1,11 @@
+# environment
+.DS_Store
+refs/
+.claude/
+.direnv/
+docs/
+
+# python
+.venv/
+__pycache__/
+.pytest_cache/
