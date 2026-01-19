@@ -51,6 +51,10 @@ Cron triggers Claude at 7 AM to summarize active projects, recent captures, and 
 
 Reply to any note with "fix: move to Projects" or "fix: tag as urgent". Claude parses the correction, updates the vault, commits.
 
+## Open Ideas
+
+- Use ```rclone``` to mount and bidirectionally sync iCloud?
+
 ## Status
 
 **Current state:** Design and prototyping
