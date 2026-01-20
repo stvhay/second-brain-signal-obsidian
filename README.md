@@ -54,6 +54,7 @@ Reply to any note with "fix: move to Projects" or "fix: tag as urgent". Claude p
 ## Open Ideas
 
 - Use ```rclone``` to mount and bidirectionally sync iCloud?
+    - ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Testcloud/.obsidian
 
 ## Status
 

@@ -1,0 +1,13 @@
+services:
+  claude-processor:
+    container_name: claude-processor
+    restart: unless-stopped
+    build: .
+    volumes:
+      - ./claude-home:/home/developer
+    restart: unless-stopped
+    environment:
+      # Set your API key here (or configure after login)
+      # ANTHROPIC_API_KEY: "your-api-key-here"
+    stdin_open: true
+    tty: true
