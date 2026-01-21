@@ -2,7 +2,7 @@
 
 A personal knowledge capture system using Signal as the frontend and Obsidian as storage. Based on [Nate B Jones' "8 Building Blocks" architecture](https://www.youtube.com/watch?v=0TpON5T-Sw4).
 
-Send notes to yourself via Signal. Claude classifies them, files them in your Obsidian vault, and commits to git. Your Mac gets notified via MQTT and pulls the changes into iCloud where Obsidian syncs automatically.
+Send notes to yourself via Signal. Claude classifies and files them in your Obsidian vault, then commits to git. Your Mac receives an MQTT notification, pulls the changes, and syncs to Obsidian via iCloud.
 
 ## Architecture
 
@@ -14,6 +14,8 @@ Send notes to yourself via Signal. Claude classifies them, files them in your Ob
 | [Process](diagrams/02-process.svg) | ![Process](diagrams/02-process.svg) | receipt → classify → form → bounce |
 | [Storage](diagrams/03-storage.svg) | ![Storage](diagrams/03-storage.svg) | Obsidian vault → git hook |
 | [Publish](diagrams/04-publish.svg) | ![Publish](diagrams/04-publish.svg) | MQTT → launchctl service → iCloud |
+
+For detailed specifications, see [`requirements/`](requirements/).
 
 ## The 8 Building Blocks
 
@@ -30,7 +32,7 @@ Send notes to yourself via Signal. Claude classifies them, files them in your Ob
 
 ## Why Signal + Obsidian
 
-I already use both daily. Signal handles messaging complexity (delivery, encryption, attachments, voice memos) for free. Obsidian keeps everything in local markdown files I own.
+I use both daily. Signal handles delivery, encryption, and attachments. Obsidian stores everything as local markdown I control.
 
 ## Planned Flows
 
@@ -58,10 +60,12 @@ Reply to any note with "fix: move to Projects" or "fix: tag as urgent". Claude p
 
 ## Status
 
-**Current state:** Design and prototyping
+**Current state:** Capture system specified; Processing in design
 
 - [x] signal-cli receiving messages via REST API
-- [ ] Claude brain-processor implementation
+- [x] Capture system requirements complete
+- [x] Message encoding format defined (`messaging-001`)
+- [ ] Processing system implementation (claude brain-processor)
 - [ ] MQTT notification layer
 - [ ] Mac sync daemon
 - [ ] Digest and fix flows
