@@ -2,7 +2,7 @@
 
 A personal knowledge capture system using Signal as the frontend and Obsidian as storage. Based on [Nate B Jones' "8 Building Blocks" architecture](https://www.youtube.com/watch?v=0TpON5T-Sw4).
 
-Send notes to yourself via Signal. Claude classifies and files them in your Obsidian vault, then commits to git. Your Mac receives an MQTT notification, pulls the changes, and syncs to Obsidian via iCloud.
+Send notes to yourself via Signal. Claude classifies and files them in your Obsidian vault, commits to git, then pushes the changes to iCloud. Your devices are synced via iCloud and any changes you make directly to the notebook are also reviewed by the processing system.
 
 ## Architecture
 
