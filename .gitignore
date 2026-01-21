@@ -4,6 +4,7 @@ refs/
 .claude/
 .direnv/
 docs/
+.envrc.local/
 
 # python
 .venv/
