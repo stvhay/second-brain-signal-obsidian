@@ -2,7 +2,7 @@
 
 ## Description
 
-This document defines cross-cutting requirements that apply to all components of the second-brain system.
+This document defines system-level functional requirements and cross-cutting requirements that apply to all components of the second-brain system.
 
 ## Scope
 
@@ -20,6 +20,67 @@ The second-brain comprises four systems:
 | Publish | Notify external systems via MQTT, sync to iCloud |
 
 See [architecture diagrams](../diagrams/) for data flow details.
+
+## System Functional Requirements
+
+### Capture
+
+> See: [Capture](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=550), [Key Principles](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=1029)
+
+1. [SYS-001] The system shall accept user input from multiple channels (e.g., messaging apps, voice, mobile apps, desktop).
+2. [SYS-002] The system shall accept multiple input modalities including text, voice, images, and video.
+3. [SYS-003] The system shall not require the user to classify or organize content at capture time.
+4. [SYS-004] The system shall accept raw, unstructured input without requiring specific formatting.
+5. [SYS-005] The system shall support single-action capture from any open channel.
+
+### Organization
+
+> See: [Sorter](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=603), [AI Classification](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=654), [Form/Schema](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=661)
+
+6. [SYS-006] The system shall automatically classify content into user-defined categories.
+7. [SYS-007] The system shall automatically extract structured metadata from content, including but not limited to: dates, people, tags, and project references.
+8. [SYS-008] The system shall automatically route content to appropriate locations based on classification and inferred patterns.
+9. [SYS-009] The system shall assign a confidence score to each classification, extraction, and routing decision.
+10. [SYS-010] The system shall act autonomously when confidence exceeds user-configured thresholds.
+11. [SYS-011] The system shall use consistent schemas to enable automation and querying.
+
+### Preservation
+
+> See: [Filing Cabinet](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=718), [Receipt/Audit Trail](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=766)
+
+12. [SYS-012] The system shall preserve the original captured content unchanged, regardless of transformations applied.
+13. [SYS-013] The system shall log every decision with the reasoning that led to it.
+14. [SYS-014] The system shall maintain a complete audit trail of what came in, what the system did with it, and the confidence level.
+15. [SYS-015] The system shall enable users to trace any stored item back to its original capture and the decisions made about it.
+16. [SYS-016] The system shall store content in a format that is human-readable and directly editable.
+
+### Trust
+
+> See: [Bouncer](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=809), [Fix Button](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=978), [Trivial Corrections](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=1025)
+
+17. [SYS-017] The system shall not file content when confidence is below configured thresholds; it shall ask for clarification instead.
+18. [SYS-018] The system shall prevent low-quality or uncertain outputs from polluting the user's knowledge base.
+19. [SYS-019] The system shall support single-action correction of any decision.
+20. [SYS-020] The system shall confirm what it did after each action, including confidence level.
+21. [SYS-021] The system shall learn from user corrections to improve future decisions.
+22. [SYS-022] The system shall explain its reasoning when asking for clarification.
+
+### Communication
+
+> See: [Tap on the Shoulder](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=865), [Weekly Review](https://www.youtube.com/watch?v=0TpON5T-Sw4&t=936)
+
+23. [SYS-023] The system shall proactively deliver relevant information to the user without requiring the user to search.
+24. [SYS-024] The system shall provide configurable periodic summaries (e.g., daily digest, weekly review).
+25. [SYS-025] The system shall surface items needing user attention (low confidence, pending clarifications, stale items).
+26. [SYS-026] The system shall deliver messages through user-preferred channels.
+27. [SYS-027] The system shall support multi-turn conversations when resolving ambiguity.
+
+### Access
+
+28. [SYS-028] The system shall make stored content accessible from multiple devices.
+29. [SYS-029] The system shall synchronize content to user-configured destinations.
+30. [SYS-030] The system shall notify external systems when content changes.
+31. [SYS-031] The system shall support user export of all stored content.
 
 ## Documentation Requirements
 
