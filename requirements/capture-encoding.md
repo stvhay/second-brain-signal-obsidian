@@ -1,8 +1,19 @@
 # Capture Encoding Standards
 
+This document defines message encoding for bidirectional communication between Capture and Processing systems.
+
+- **Inbound messages**: Capture → Processing (user input)
+- **Outbound messages**: Processing → Capture (system responses)
+
+Both directions use the same encoding specifications. Messages are self-contained; Processing reconstructs conversation state from its logs rather than requiring explicit threading.
+
+---
+
 ## Encoding: `messaging-001`
 
-The `messaging-001` encoding specification for capture messages.
+The `messaging-001` encoding specification for messages between Capture and Processing.
+
+### Inbound Example (Capture → Processing)
 
 ```json
 {
@@ -28,17 +39,31 @@ The `messaging-001` encoding specification for capture messages.
 }
 ```
 
+### Outbound Example (Processing → Capture)
+
+```json
+{
+  "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "encodingId": "messaging-001",
+  "timestamp": "2026-01-19T21:25:00.000Z",
+  "content": [
+    { "type": "text", "data": "I received 'Check out this sunset' with a photo. Should I file this as a journal entry, or is there a task here I should track?" }
+  ],
+  "captureContext": {}
+}
+```
+
 ## Top-Level Fields
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | UUID | Yes | Unique message identifier |
-| `encodingId` | string | Yes | Encoding specification identifier (e.g., `messaging-001`) |
-| `captureSystemId` | UUID | Yes | Identifies the capture system instance |
-| `timestamp` | string | Yes | ISO 8601 UTC timestamp (e.g., `2026-01-19T21:21:56.000Z`) |
-| `location` | object | No | GPS coordinates if available |
-| `content` | array | Yes | One or more content items |
-| `captureContext` | object | No | Opaque object reserved for capture system use. Processing must include this unchanged in any response. |
+| Field | Type | Direction | Required | Description |
+|-------|------|-----------|----------|-------------|
+| `id` | UUID/hash | Both | Yes | Unique message identifier |
+| `encodingId` | string | Both | Yes | Encoding specification identifier (`messaging-001`) |
+| `captureSystemId` | UUID | Inbound | Yes | Identifies the capture system instance |
+| `timestamp` | string | Both | Yes | ISO 8601 UTC timestamp |
+| `location` | object | Inbound | No | GPS coordinates if available |
+| `content` | array | Both | Yes | One or more content items |
+| `captureContext` | object | Both | No | Opaque object for capture system use. Processing includes this unchanged in responses to enable capture-system-specific handling. |
 
 ## Content Item Types
 
