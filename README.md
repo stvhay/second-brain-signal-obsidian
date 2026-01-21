@@ -21,7 +21,7 @@ For detailed specifications, see [`requirements/`](requirements/).
 
 | Block | Purpose | Implementation |
 |-------|---------|----------------|
-| **Capture** | Quick input from anywhere | Signal Note-to-Self |
+| **Capture** | Quick input from anywhere | Signal Note-to-Self, Obsidian via iCloud |
 | **Sorter** | Classify and route notes | Claude agent |
 | **Form** | Structured metadata | YAML frontmatter |
 | **Filing Cabinet** | Organized storage | Obsidian folders |
@@ -64,7 +64,8 @@ Reply to any note with "fix: move to Projects" or "fix: tag as urgent". Claude p
 
 - [x] signal-cli receiving messages via REST API
 - [x] Capture system requirements complete
-- [x] Message encoding format defined (`messaging-001`)
+- [x] Message encoding formats defined (`messaging-001`, `changeset-001`)
+- [x] iCloud/Obsidian capture implementation specified
 - [ ] Processing system implementation (claude brain-processor)
 - [ ] MQTT notification layer
 - [ ] Mac sync daemon

@@ -2,7 +2,7 @@
 
 ## Encoding: `messaging-001`
 
-This document defines the `messaging-001` encoding specification for capture messages.
+The `messaging-001` encoding specification for capture messages.
 
 ```json
 {
@@ -66,3 +66,65 @@ This document defines the `messaging-001` encoding specification for capture mes
 | `lat` | float | Latitude in decimal degrees |
 | `lon` | float | Longitude in decimal degrees |
 | `accuracy` | integer | Accuracy in meters |
+
+---
+
+## Encoding: `changeset-001`
+
+A `changeset-001` message is a git patch. The commit itself serves as the canonical message format.
+
+### Structure
+
+```
+From <sha> <date>
+From: <capture-system-name> <email>
+Date: <rfc-2822-timestamp>
+Subject: [PATCH] encodingId: changeset-001
+
+captureSystemId: <uuid>
+
+---
+<diffstat>
+
+<diff content>
+```
+
+### Example
+
+```
+From a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0 Mon Jan 20 00:00:00 2026
+From: capture-icloud <capture@second-brain.local>
+Date: Mon, 20 Jan 2026 15:30:00 +0000
+Subject: [PATCH] encodingId: changeset-001
+
+captureSystemId: 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+
+---
+ notes/project.md         | 3 ++-
+ attachments/photo.jpg    | Bin 0 -> 141880 bytes
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/notes/project.md b/notes/project.md
+index 1234567..abcdef0 100644
+--- a/notes/project.md
++++ b/notes/project.md
+@@ -10,6 +10,8 @@ Some existing content
++New content added by user
+```
+
+### Required Fields
+
+| Field | Location | Description |
+|-------|----------|-------------|
+| Message ID | SHA in `From` line | Unique identifier (SHA-1 or SHA-256 per [FIPS 180-4](https://csrc.nist.gov/publications/detail/fips/180/4/final)) |
+| Timestamp | `Date` header | RFC 2822 format |
+| `encodingId` | Subject line | Must be `changeset-001` |
+| `captureSystemId` | Message body | UUID of capture system instance |
+
+### Content Types
+
+Content type is determined by file extension per [capture-types.md](capture-types.md). A single message may contain multiple content types when multiple files are changed.
+
+### captureContext
+
+Not applicable. This encoding omits processing confirmation (requirement 10), so `captureContext` round-tripping is unnecessary.
