@@ -4,6 +4,43 @@ A personal knowledge capture system using Signal as the frontend and Obsidian as
 
 Send notes to yourself via Signal. Claude classifies and files them in your Obsidian vault, commits to git, then pushes the changes to iCloud. Your devices are synced via iCloud and any changes you make directly to the notebook are also reviewed by the processing system.
 
+## Preamble
+
+### **WORK IN PROGRESS**
+
+This project is incomplete. Documentation may be inconsistent until it stabilizes. I am capturing general system requirements first, then filling in details for my implementation using Signal and Obsidian. Diagrams and requirements are rough. Here is how the system works:
+
+- A `signal-cli` front-end acts as a Signal linked device and REST API. It watches my messages, captures any "Notes to Self" (messages to my own phone number), and relays them to the processing system. I self-host this in Docker containers. No inbound ports are required.
+
+- As messages come in, the system places them in an inbox. Claude-code processes the queue. Messages are logged unchanged as a permanent audit trail.
+
+- Claude-code reads incoming messages, decides what to do, and updates the notebook. This is an LLM-driven extract-transform-load (ETL) pipeline—call it ECTL, where _C_ is for _classify_:
+
+    1. **Extract** the message
+    2. **Classify** its type and destination
+    3. **Transform** it to match the notebook schema
+    4. **Load** it into the notebook
+
+The system generates confidence scores at every step, logs them with the message, and uses them to decide when to prompt me for clarification. These scores may also serve as training data for self-improvement. 
+
+- iCloud syncs notebook updates to my devices (no Obsidian Sync). Incoming changes from iCloud become another message source as edits or diffs. A git worktree stages those changes for LLM processing the same way. Rsync publishes back out, with care to avoid conflicts with incoming iCloud edits.
+
+That's the target system. The requirements structure should help others plug in different tools—Telegram, Discord, Slack, or other capture methods. Other notebook systems could work too.
+
+I have a working notebook system without these features. Integrating them adds complexity beyond Nate's simplified structure.
+
+**WORK IN PROGRESS**
+
+### Risks and Challenges
+
+1. **Getting an LLM system to reliably process messages.**
+
+LLMs excel at some tasks (writing boilerplate TypeScript) but fail at others (counting to N). Keeping these systems following the defined process is a key challenge. Effective prompting and context management help, but LLMs need more structure than pure prompting to be reliable. The primary challenge: enforcing a core process that LLMs cannot bypass.
+
+2. **Stable Continuous Improvement.**
+
+The system must examine its mistakes and self-improve autonomously. This creates another escape mechanism: the LLM can rewrite its core program over time. The broader question: what are the **invariant** properties of the system? This is why I am writing formal requirements. These requirements define what must not change.
+
 ## Architecture
 
 ![Overview](diagrams/00-overview.svg)
