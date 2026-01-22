@@ -136,3 +136,9 @@ On startup, the capture system:
 | No GPS location | Filesystem changes lack location data |
 | No attachment size negotiation | Large files are committed as-is; processing may reject |
 | Response pathway | Fix conversations route through Signal, not back through iCloud |
+
+## Coordination with Publish
+
+This implementation shares the iCloud directory with [publish-implementation-icloud.md](publish-implementation-icloud.md). Both systems MUST be deployed together.
+
+**Required:** [publish-implementation-icloud-coordination.md](publish-implementation-icloud-coordination.md)

@@ -20,7 +20,7 @@ The Processing system receives encoded messages from Capture, applies AI-powered
 |--------|-----------------|
 | Capture | Receives inbound messages; sends outbound messages (Fix, prompts) |
 | Storage | Reads schema/preferences/content; writes processed notes and log |
-| Publish | No direct interaction (Storage notifies Publish on change) |
+| Publish | Monitors publish status; notifies user when distribution is blocked |
 
 ## Core Operations
 
@@ -148,6 +148,16 @@ The Processing system receives encoded messages from Capture, applies AI-powered
 55. [PROC-055] The system shall persist inbound messages until successfully processed or quarantined.
 56. [PROC-056] The system shall gracefully drain pending work before shutdown.
 57. [PROC-057] The system should process messages within a configurable time limit; messages exceeding the limit shall be logged and may trigger a Fix request indicating processing complexity.
+
+## Publish Status Monitoring
+
+58. [PROC-058] The system shall monitor Publish status indicators exposed per PUB-008.
+59. [PROC-059] When Publish indicates distribution is blocked or delayed, the system shall notify the user via the configured Capture system for `review` messages.
+60. [PROC-060] Publish status notifications shall include:
+    - Which channel is affected
+    - Reason for the block (if available from the status indicator)
+    - Duration of the block
+    - Suggested user action (if applicable)
 
 ## Cross-Cutting Requirements
 

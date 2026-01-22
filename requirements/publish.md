@@ -19,6 +19,7 @@ The Publish system receives content from Storage and distributes it to external 
 5. [PUB-005] If the message protocol specifies ordering requirements, the system shall respect them.
 6. [PUB-006] Each implementation shall document its supported channel types.
 7. [PUB-007] Each implementation shall document its failure handling policy.
+8. [PUB-008] The system shall expose distribution status when publish is blocked or delayed beyond implementation-defined thresholds. The status mechanism is implementation-defined; Processing is responsible for monitoring status and notifying users.
 
 ## Cross-Cutting Requirements
 
